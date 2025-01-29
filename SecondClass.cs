@@ -10,8 +10,7 @@ public class SecondClass
         {
             Console.WriteLine($" {board[i, 0]} | {board[i, 1]} | {board[i, 2]}");
             if (i < 2) Console.WriteLine("----|----|----");
-        }
-
+        } 
     }
     
     // receives the board and outputs the board as playing and determines winner
@@ -34,21 +33,36 @@ public class SecondClass
     }
     
     // Method to check if there is a winner
-    public bool CheckWinner(char[,] board)
+    public bool CheckWinner(char[,] board, char player)
     {
         // Check rows, columns, and diagonals
         for (int i = 0; i < 3; i++)
         {
             // Check rows and columns
-            if ((board[i, 0] == board[i, 1] && board[i, 1] == board[i, 2]) ||
-                (board[0, i] == board[1, i] && board[1, i] == board[2, i])) return true;
+            if ((board[i, 0] == player && board[i, 1]  == player && board[i, 2] == player) ||
+                (board[0, i] == player && board[1, i] == player && board[2, i] == player)) return true;
         }
 
         // Check diagonals
-        if (board[0, 0] == board[1, 1] && board[1, 1] == board[2, 2]) return true;
-        if (board[0, 2] == board[1, 1] && board[1, 1] == board[2, 0]) return true;
+        if (board[0, 0] == player && board[1, 1] == player && board[2, 2] == player) return true;
+        if (board[0, 2] == player && board[1, 1] == player && board[2, 0] == player) return true;
 
         return false; 
     }
-
+    
+    // method to check if board is full
+    public bool CheckBoard(char[,] board)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (board[i, j] == 'X' && board[i, j] == 'O')
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
