@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Mission4Assignment;
 internal class Program
 {
@@ -13,6 +13,7 @@ internal class Program
 
         const char playerOneMark = 'X';
         const char playerTwoMark = 'O';
+        char playerMark;
 
         char[,] boardArray = new char[3, 3]
             {
@@ -47,9 +48,11 @@ internal class Program
             {
                 // Update the board
                 boardArray[row, col] = player == 1 ? playerOneMark : playerTwoMark;
+                playerMark = player == 1 ? playerOneMark : playerTwoMark;
 
                 // Check for winner
-                gameOver = sc.CheckWinner(boardArray, player);
+                playerMark = player == 1 ? playerOneMark : playerTwoMark;
+                gameOver = sc.CheckWinner(boardArray, playerMark);
 
                 // If no winner, switch player
                 player = (player == 1) ? 2 : 1;
