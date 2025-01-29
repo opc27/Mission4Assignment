@@ -10,6 +10,7 @@ internal class Program
         int choice;
         string input;
         bool gameOver = false;
+        bool gameWinner = false;
 
         const char playerOneMark = 'X';
         const char playerTwoMark = 'O';
@@ -24,7 +25,7 @@ internal class Program
 
         Console.WriteLine("Welcome to Tic-Tac-Toe!");
 
-        while (!gameOver)
+        while (!gameOver || !gameWinner)
         {
             // Print the board
             sc.PrintBoard(boardArray);
@@ -50,12 +51,18 @@ internal class Program
                 boardArray[row, col] = player == 1 ? playerOneMark : playerTwoMark;
                 playerMark = player == 1 ? playerOneMark : playerTwoMark;
 
-                // Check for winner
+                // Check winners mark
                 playerMark = player == 1 ? playerOneMark : playerTwoMark;
-                gameOver = sc.CheckWinner(boardArray, playerMark);
+
+                //Check if board is full or there is a winner
+                gameOver = sc.CheckBoard(boardArray);
+                gameWinner = sc.CheckWinner(boardArray, playerMark);
 
                 // If no winner, switch player
-                player = (player == 1) ? 2 : 1;
+                if (gameOver != true)
+                { 
+                    player = (player == 1) ? 2 : 1;
+                }
             }
             else
             {
@@ -66,9 +73,17 @@ internal class Program
         }
         // Print final board
         sc.PrintBoard(boardArray);
-
         // Display winner if any
+        if (gameWinner == true)
+        {
+            Console.WriteLine("Player {0} WON!!!\n", player);
+        }
+        else
+        {
+            Console.WriteLine("The game ended in a tie!\n");
+        }
 
+        Console.WriteLine("Thanks for playing!");
     }
 
 }
