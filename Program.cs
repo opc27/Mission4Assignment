@@ -25,7 +25,7 @@ internal class Program
 
         Console.WriteLine("Welcome to Tic-Tac-Toe!");
 
-        while (!gameOver || !gameWinner)
+        while (!gameOver && !gameWinner)
         {
             // Print the board
             sc.PrintBoard(boardArray);
@@ -59,10 +59,14 @@ internal class Program
                 gameWinner = sc.CheckWinner(boardArray, playerMark);
 
                 // If no winner, switch player
-                if (gameOver != true)
-                { 
-                    player = (player == 1) ? 2 : 1;
+                if (gameOver == false)
+                {
+                    if (gameWinner == false)
+                    {
+                        player = (player == 1) ? 2 : 1;
+                    }
                 }
+
             }
             else
             {
